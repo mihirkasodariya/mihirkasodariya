@@ -18,4 +18,4 @@ I'm a passionate **Node.js Developer** with expertise in building powerful serve
 - Email: [mihirkasodariya21@gmail.com](mailto:mihirkasodariya21@gmail.com)
 - GitHub: [https://github.com/mihirkasodariya](https://github.com/mihirkasodariya)
 - Portfolio: [https://mihirkasodariya.com](https://mihirkasodariya.vercel.app)
-#### Thanks for visiting my profile! Feel free to check out my repositories and connect with me. 😊
+--- Thanks for visiting my profile! Feel free to check out my repositories and connect with me. 😊
