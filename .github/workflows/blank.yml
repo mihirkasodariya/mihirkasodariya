@@ -10,17 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository (main branch)
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
-          ref: main   # force checkout main branch
+          ref: main
 
       - name: Setup Git
         run: |
           git config --global user.name "mihirkasodariya"
           git config --global user.email "mihirkasodariya21@gmail.com"
+
+      - name: Ensure branch is up to date
+        run: |
+          git pull https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mihirkasodariya/mihirkasodariya.git main --rebase
 
       - name: Generate Random Commit Message
         id: commit_msg
@@ -39,6 +43,6 @@ jobs:
         run: |
           git commit --allow-empty -m "${{ steps.commit_msg.outputs.msg }}"
 
-      - name: Push commit to main
+      - name: Push commit
         run: |
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mihirkasodariya/mihirkasodariya.git main
