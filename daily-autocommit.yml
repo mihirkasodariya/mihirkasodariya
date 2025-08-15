@@ -1,0 +1,39 @@
+name: Daily Auto Commit
+
+on:
+  schedule:
+    - cron: '*/1 * * * *' # Runs every day at 09:00 UTC
+  workflow_dispatch: # Manual trigger option
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate Random Commit Message
+        id: commit_msg
+        run: |
+          MESSAGES=("Updating magic ✨" \
+                    "Keeping the streak alive 🔥" \
+                    "Another day, another push 🚀" \
+                    "Pushing pixels and code 📦" \
+                    "Making the repo happy 😄" \
+                    "Coding in autopilot 🤖" \
+                    "Fresh update incoming 🌱")
+          RANDOM_INDEX=$((RANDOM % ${#MESSAGES[@]}))
+          echo "msg=${MESSAGES[$RANDOM_INDEX]}" >> $GITHUB_OUTPUT
+
+      - name: Make changes
+        run: |
+          echo "Last updated: $(date)" > last-update.txt
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "mihirkasodariya"
+          git config --global user.email "mihirkasodariya21@gmail.com"
+          git add .
+          git commit -m "${{ steps.commit_msg.outputs.msg }}"
+          git push
