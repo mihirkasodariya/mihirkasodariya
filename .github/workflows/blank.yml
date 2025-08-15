@@ -2,8 +2,8 @@ name: Daily Auto Commit
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Runs every day at 09:00 UTC
-  workflow_dispatch: # Manual trigger option
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   auto-commit:
@@ -26,14 +26,14 @@ jobs:
           RANDOM_INDEX=$((RANDOM % ${#MESSAGES[@]}))
           echo "msg=${MESSAGES[$RANDOM_INDEX]}" >> $GITHUB_OUTPUT
 
-      - name: Make changes
+      - name: Make changes (optional)
         run: |
           echo "Last updated: $(date)" > last-update.txt
 
-      - name: Commit and Push changes
+      - name: Commit and Push changes (allow empty)
         run: |
           git config --global user.name "mihirkasodariya"
           git config --global user.email "mihirkasodariya21@gmail.com"
           git add .
-          git commit -m "${{ steps.commit_msg.outputs.msg }}"
+          git commit --allow-empty -m "${{ steps.commit_msg.outputs.msg }}"
           git push
