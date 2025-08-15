@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # Disable default token
+          fetch-depth: 0              # Full repo history
 
       - name: Generate Random Commit Message
         id: commit_msg
@@ -35,5 +38,5 @@ jobs:
           git config --global user.name "mihirkasodariya"
           git config --global user.email "mihirkasodariya21@gmail.com"
           git add .
-          git commit --allow-empty -m "${{ steps.commit_msg.outputs.msg }}"
-          git push
+          git commit --allow-empty -m "${{ steps.commit_msg.outputs.msg }}" || echo "No changes, but forcing commit"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
