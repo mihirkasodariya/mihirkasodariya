@@ -26,7 +26,7 @@ I’m passionate about building **fast, scalable, and user-friendly web applicat
 Node.js • Express.js • REST APIs • WebSockets • JavaScript • TypeScript
 
 **Frontend:**  
-React.js • Next.js • TypeScript • TailwindCSS  
+React.js • Next.js  • TailwindCSS  
 
 **Databases:**  
 MongoDB • PostgreSQL • MySQL • SQL
